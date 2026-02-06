@@ -70,7 +70,7 @@ pipeline {
                 script {
                     echo "📥 Installing npm dependencies..."
                     nodejs(nodeJSInstallationName: "NodeJS ${NODE_VERSION}") {
-                        bat 'npm ci'  // Use ci for faster, reliable installs in CI environments
+                        bat 'npm install'  // Use install since package-lock.json may not exist
                         bat 'npm install --save-dev allure-playwright allure-commandline'  // Install Allure reporter
                     }
                 }
