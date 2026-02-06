@@ -2,13 +2,13 @@
 const { test, expect } = require('@playwright/test');
 const BaseTest = require('../../src/Base/BaseTest');
 const CoreKeywords = require('../../src/Core/CoreKeywords');
-const LoginKeywords = require('../../src/Core/LoginKeywords');
+// const LoginKeywords = require('../../src/Core/LoginKeywords');
 const JsonLocalizationParser = require('../../src/Parsers/JsonLocalizationParser');
 const Constants = require('../../src/Utils/Constants');
 
 let baseTest;
 let core;
-let login;
+// let login;
 let loc;
 
 test.describe('Smoke Tests', () => {
