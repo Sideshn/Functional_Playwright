@@ -1,0 +1,25 @@
+{
+  "pages": {
+    "ContactUS": {
+      "relative_path": "/contact_us",
+      "elements": {
+        "ContactUsHeading": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "heading", "roleOptions": { "name": "Contact Us", "level": 2 } },
+        "GetInTouchHeading": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "heading", "roleOptions": { "name": "Get In Touch", "level": 2 } },
+        "NameInputBox": { "id": "", "name": "name", "xpath": "", "class": "", "type": "data-qa", "dataQa": "name" },
+        "EmailInputBox": { "id": "", "name": "email", "xpath": "", "class": "", "type": "data-qa", "dataQa": "email" },
+        "SubjectInputBox": { "id": "", "name": "subject", "xpath": "", "class": "", "type": "data-qa", "dataQa": "subject" },
+        "MessageTextArea": { "id": "#message", "name": "message", "xpath": "", "class": "", "type": "data-qa", "dataQa": "message" },
+        "UploadFileInput": { "id": "", "name": "upload_file", "xpath": "//input[@name='upload_file']", "class": "", "type": "" },
+        "SubmitButton": { "id": "", "name": "submit", "xpath": "", "class": "", "type": "data-qa", "dataQa": "submit-button" },
+        "SuccessMessage": { "id": "", "name": "", "xpath": "", "class": ".status.alert.alert-success", "type": "" },
+        "HomeButton": { "id": "", "name": "", "xpath": "", "class": ".btn.btn-success", "type": "" },
+        "FeedbackHeading": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "heading", "roleOptions": { "name": "Feedback For Us", "level": 2 } },
+        "FeedbackEmailLink": { "id": "", "name": "", "xpath": "//a[@href='mailto:feedback@automationexercise.com']", "class": "", "type": "" },
+        "FeedbackText1": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Feedback For Us')]/following-sibling::p[1]", "class": "", "type": "" },
+        "FeedbackText2": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Feedback For Us')]/following-sibling::p[2]", "class": "", "type": "" },
+        "FeedbackText3": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Feedback For Us')]/following-sibling::p[3]", "class": "", "type": "" },
+        "FeedbackText4": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Feedback For Us')]/following-sibling::p[4]", "class": "", "type": "" }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "pages": {
+    "Cart": {
+      "relative_path": "/view_cart",
+      "elements": {
+        "NameOnCardInput": { "id": "", "name": "", "xpath": "//input[@name='name_on_card'] | //input[@placeholder='Name on Card'] | //input[contains(@aria-label,'Name on Card')]", "class": "", "type": "" },
+        "CardNumberInput": { "id": "", "name": "", "xpath": "//input[@name='card_number'] | //input[@placeholder='Card Number'] | //input[contains(@aria-label,'Card Number')] | //input[following-sibling::*[contains(text(),'Card Number')]]", "class": "", "type": "" },
+        "CVCInput": { "id": "", "name": "", "xpath": "//input[@name='cvc'] | //input[@placeholder='CVC'] | //input[contains(@aria-label,'CVC')] | //input[preceding-sibling::*[contains(text(),'CVC')]] | //input[@type='text' and (contains(@placeholder,'ex. 311') or contains(@aria-label,'CVC'))]", "class": "", "type": "" },
+        "ExpirationMonthInput": { "id": "", "name": "", "xpath": "//input[@name='expiry_month'] | //input[@placeholder='MM'] | //input[contains(@aria-label,'Expiration Month')] | //input[preceding-sibling::*[contains(text(),'Expiration')]]", "class": "", "type": "" },
+        "ExpirationYearInput": { "id": "", "name": "", "xpath": "//input[@name='expiry_year'] | //input[@placeholder='YYYY'] | //input[@data-qa='expiry-year'] | //input[contains(@class,'card-expiry-year')]", "class": "", "type": "" },
+        "PayAndConfirmOrderButton": { "id": "", "name": "", "xpath": "//button[contains(text(),'Pay and Confirm Order')] | //a[contains(text(),'Pay and Confirm Order')]", "class": "", "type": "" },
+        "OrderSuccessMessage": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Order Placed!')] | //p[contains(text(),'Congratulations! Your order has been confirmed!')]", "class": "", "type": "" },
+        "PlaceOrderButton": { "id": "", "name": "", "xpath": "//a[contains(text(),'Place Order')]", "class": "", "type": "" },
+        "OrderCommentTextArea": { "id": "", "name": "", "xpath": "//textarea", "class": "", "type": "" },
+        "OrderReviewSection": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Review Your Order')]", "class": "", "type": "" },
+        "AddressDetailsSection": { "id": "", "name": "", "xpath": "//h2[contains(text(),'Address Details')]", "class": "", "type": "" },
+        "RegisterOrLoginButton": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Register / Login" } },
+        "ProceedToCheckoutButton": { "id": "", "name": "", "xpath": "//*[self::a or self::button or self::div][contains(text(),'Proceed To Checkout')]", "class": "", "type": "" },
+        "CartPageHeading": { "id": "", "name": "", "xpath": "//li[contains(text(),'Shopping Cart')]", "class": "", "type": "" },
+        "CartInfoTable": { "id": "#cart_info_table", "name": "", "xpath": "", "class": "", "type": "" },
+        "CartTableRows": { "id": "", "name": "", "xpath": "//table[@id='cart_info_table']//tbody//tr", "class": "", "type": "" },
+        "FirstProductName": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[1]//td[@class='cart_description']//h4/a", "class": "", "type": "" },
+        "FirstProductPrice": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[1]//td[@class='cart_price']/p", "class": "", "type": "" },
+        "FirstProductQuantity": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[1]//td[@class='cart_quantity']/button", "class": "", "type": "" },
+        "FirstProductTotal": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[1]//td[@class='cart_total']/p", "class": "", "type": "" },
+        "SecondProductName": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[2]//td[@class='cart_description']//h4/a", "class": "", "type": "" },
+        "SecondProductPrice": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[2]//td[@class='cart_price']/p", "class": "", "type": "" },
+        "SecondProductQuantity": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[2]//td[@class='cart_quantity']/button", "class": "", "type": "" },
+        "SecondProductTotal": { "id": "", "name": "", "xpath": "(//table[@id='cart_info_table']//tbody//tr)[2]//td[@class='cart_total']/p", "class": "", "type": "" },
+        "ProductDeleteButton": { "id": "", "name": "", "xpath": "//a[@class='cart_quantity_delete']", "class": "", "type": "" }
+      }
+    }
+  }
+}

@@ -1,0 +1,193 @@
+/**
+ * Test Suite: User Registration and Login Flow - Excel Data Driven
+ * 
+ * Purpose: End-to-end testing of user registration, login, and account management
+ * Framework: Playwright with JavaScript - Using Existing Framework
+ * Pattern: Page Object Model with JSON Parsers
+ * Data Source: Excel File (TestData/TestData.xlsx)
+ * 
+ * Test Coverage:
+ * - TC001: Complete user registration flow with validation
+ * - TC002: Login with valid credentials
+ * - TC003: Login validation with invalid credentials
+ * - TC004: Register user with existing email validation
+ * - TC005: Account deletion flow
+ * 
+ * @author Automation Team
+ * @version 6.0 - Added Excel data driven testing
+ * @updated November 11, 2025
+ */
+
+const { test, expect } = require('../../src/fixtures/dataFixtures');
+
+test.describe('User Registration and Login Flow - Excel Data Driven', () => {
+
+  /**
+   * TC001: Complete User Registration Flow
+   * Steps:
+   * 1. Navigate to signup page
+   * 2. Enter signup details (name and email)
+   * 3. Fill registration form with all details
+   * 4. Submit and verify account creation
+   */
+  test('TC001: Complete user registration with all details', async ({ homeHelper, loginHelper, loc, page, excelData }) => {
+    // Use Excel data if available, otherwise fall back to config
+    const testData = excelData('UserData', 'TestCase', 'TC002');
+    
+    // Verify home page visible
+    await homeHelper.isHomePageVisible();
+    
+    // Navigate to signup/login page
+    await homeHelper.navigateToSignupLogin();
+    
+    // Complete signup flow
+    await loginHelper.signup(testData.username, testData.emailAddress);
+    
+    // Fill registration form
+    await loginHelper.fillAccountInformation(testData);
+    
+    await loginHelper.fillAddressInformation(testData.address);
+    
+    await loginHelper.createAccount();
+    
+    // Verify account creation success
+    const isAccountCreated = await loginHelper.isAccountCreated();
+    expect(isAccountCreated).toBe(true);
+    
+    await loginHelper.clickContinue();
+    
+    // Verify logged in
+    const isLoggedIn = await homeHelper.isUserLoggedIn(testData.username);
+    expect(isLoggedIn).toBe(true);
+    
+    await homeHelper.logout();
+    
+    // Verify redirected to login page - wait for page load then check URL
+    await page.waitForLoadState('load', { timeout: 10000 });
+    const currentUrl = page.url();
+    expect(currentUrl).toContain('/login');
+  });
+
+  /**
+   * TC002: Login with Valid Credentials
+   */
+  test('TC002: Login with valid credentials', async ({ homeHelper, loginHelper, page, excelData }) => {
+    const testData = excelData('UserData', 'TestCase', 'TC002');
+    
+    let pageUrl = page.url();
+    if (!pageUrl.includes('/login')) {
+      await homeHelper.navigateToSignupLogin();
+    }
+    
+    await loginHelper.isLoginSectionVisible();
+    await loginHelper.login(testData.emailAddress, testData.password);
+    
+    const isLoggedIn = await homeHelper.isUserLoggedIn(testData.username);
+    expect(isLoggedIn).toBe(true);
+    
+    await homeHelper.logout();
+    await page.waitForLoadState('load', { timeout: 10000 });
+    
+    // Verify logout successful
+    const currentUrl = page.url();
+    expect(currentUrl).toContain('/login');
+  });
+
+  /**
+   * TC003: Login with Invalid Credentials
+   * Steps:
+   * 1. Logout from current session
+   * 2. Navigate to login page
+   * 3. Enter invalid credentials
+   * 4. Verify error message
+   */
+  test('TC003: Login validation with invalid credentials', async ({ homeHelper, loginHelper, loc, page, excelData }) => {
+    const testData = excelData('UserData', 'TestCase', 'TC002');
+    
+    let pageUrl2 = page.url();
+    if (!pageUrl2.includes('/login')) {
+      await homeHelper.navigateToSignupLogin();
+    }
+    
+    await loginHelper.isLoginSectionVisible();
+    
+    const invalidEmail = 'invalid_' + testData.emailAddress;
+    const invalidPassword = 'WrongPassword123';
+    
+    await loginHelper.login(invalidEmail, invalidPassword);
+    
+    // Wait for error message to appear and verify
+    const expectedError = loc.getValue('ConstraintStrings', 'Login.InvalidCredentials');
+    const errorMessage = await page.locator('p').filter({ hasText: expectedError }).first();
+    await expect(errorMessage).toBeVisible({ timeout: 5000 });
+    
+    // Verify still on login page (no need for additional checks)
+    const currentUrl = page.url();
+    expect(currentUrl).toContain('/login');
+  });
+
+  /**
+   * TC004: Register User with Existing Email
+   * Steps:
+   * 1. Navigate to signup/login page
+   * 2. Verify 'New User Signup!' is visible
+   * 3. Enter name and already registered email address
+   * 4. Click 'Signup' button
+   * 5. Verify error 'Email Address already exist!' is visible
+   */
+  test('TC004: Register user with existing email', async ({ homeHelper, loginHelper, loc, page, excelData }) => {
+    const testData = excelData('UserData', 'TestCase', 'TC002');
+    
+    let pageUrl3 = page.url();
+    if (!pageUrl3.includes('/login')) {
+      await homeHelper.navigateToSignupLogin();
+    }
+    
+    await loginHelper.isSignupSectionVisible();
+    await loginHelper.fillSignupForm(testData.username, testData.emailAddress);
+    await loginHelper.clickSignup();
+    
+    // Wait for error message to appear
+    const errorMessage = await page.locator('p').filter({ hasText: 'Email Address already exist!' }).first();
+    await expect(errorMessage).toBeVisible({ timeout: 5000 });
+    
+    // Verify error message text
+    const errorText = await errorMessage.textContent();
+    const expectedError = loc.getValue('ConstraintStrings', 'Signup.EmailAlreadyExists');
+    expect(errorText.trim()).toBe(expectedError);
+
+    // Verify still on signup page
+    const currentUrl = page.url();
+    expect(currentUrl).toContain('/signup');
+  });
+
+  /**
+   * TC005: Account Deletion Flow
+   * Steps:
+   * 1. Login with valid credentials
+   * 2. Navigate to delete account
+   * 3. Verify account deletion confirmation
+   */
+  test('TC005: Delete account successfully', async ({ homeHelper, loginHelper, loc, page, excelData }) => {
+    const testData = excelData('UserData', 'TestCase', 'TC002');
+    
+    let pageUrl4 = page.url();
+    if (!pageUrl4.includes('/login')) {
+      await homeHelper.navigateToSignupLogin();
+    }
+    
+    await loginHelper.login(testData.emailAddress, testData.password);
+    await homeHelper.isUserLoggedIn(testData.username);
+    
+    await homeHelper.deleteAccount();
+    
+    // Verify deletion success and continue
+    const isAccountDeleted = await loginHelper.isAccountDeleted();
+    expect(isAccountDeleted).toBe(true);
+    
+    await loginHelper.clickContinue();
+    
+    // Verify back on homepage (account no longer exists)
+    await homeHelper.isHomePageVisible();
+  });
+});

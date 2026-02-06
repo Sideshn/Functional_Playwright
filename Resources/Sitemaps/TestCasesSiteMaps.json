@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "TestCases": {
+      "relative_path": "/test_cases",
+      "elements": {
+        "TestCasesHeading": { "id": "", "name": "", "xpath": "", "class": "h2.title.text-center", "type": "" },
+        "TestCasesPanelGroup": { "id": "", "name": "", "xpath": "//div[@class='panel-group']", "class": "", "type": "" }
+      }
+    }
+  }
+}

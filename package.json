@@ -1,0 +1,56 @@
+{
+  "name": "playwright-javascript-automation-from-migration",
+  "version": "1.0.0",
+  "description": "Playwright JavaScript Automation - Migrated from C# Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:smoke": "playwright test tests/Smoke",
+    "test:signup": "playwright test tests/SignupLogin",
+    "test:products": "playwright test tests/Product",
+    "test:cart": "playwright test tests/Cart",
+    "test:contact": "playwright test tests/ContactUs",
+    "test:homepage": "playwright test tests/HomePage",
+    "test:testcases": "playwright test tests/TestCases",
+    "test:navigation": "playwright test tests/Navigation",
+    "test:dialog": "playwright test tests/DialogHandling",
+    "test:frame": "playwright test tests/FrameHandling",
+    "test:window": "playwright test tests/WindowHandling",
+    "test:file": "playwright test tests/FileReading",
+    "test:database": "playwright test tests/Database",
+    "test:services": "playwright test tests/Services",
+    "test:examples": "playwright test tests/examples",
+    "test:sequential": "playwright test --workers=1",
+    "test:parallel": "playwright test --workers=4",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "report": "playwright show-report",
+    "report:open": "playwright show-report --port 9323"
+  },
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "javascript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.42.0",
+    "playwright": "^1.42.0"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.10",
+    "better-sqlite3": "^12.4.1",
+    "csv-parse": "^6.1.0",
+    "mysql2": "^3.15.3",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.16.3",
+    "xlsx": "^0.18.5",
+    "xml2js": "^0.6.2"
+  }
+}

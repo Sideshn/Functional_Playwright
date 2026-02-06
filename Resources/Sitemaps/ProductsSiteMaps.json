@@ -1,0 +1,36 @@
+{
+  "pages": {
+    "Products": {
+      "relative_path": "/products",
+      "elements": {
+        "AllProductsHeading": { "id": "", "name": "", "xpath": "", "class": "h2.title.text-center", "type": "" },
+        "ProductsList": { "id": "", "name": "", "xpath": "", "class": ".features_items", "type": "" },
+        "FirstViewProductButton": { "id": "", "name": "", "xpath": "(//a[contains(text(),'View Product')])[1]", "class": "", "type": "" },
+        "SearchProductInput": { "id": "#search_product", "name": "", "xpath": "", "class": "", "type": "" },
+        "SearchButton": { "id": "#submit_search", "name": "", "xpath": "", "class": "", "type": "" },
+        "SearchedProductsHeading": { "id": "", "name": "", "xpath": "", "class": "h2.title.text-center", "type": "" },
+        "SearchResultsList": { "id": "", "name": "", "xpath": "", "class": ".features_items", "type": "" },
+        "FirstProductAddToCartButton": { "id": "", "name": "", "xpath": "((.//div[@class='product-image-wrapper'])[1]//a[@class='btn btn-default add-to-cart'])[1]", "class": "", "type": "" },
+        "SecondProductAddToCartButton": { "id": "", "name": "", "xpath": "((.//div[@class='product-image-wrapper'])[2]//a[@class='btn btn-default add-to-cart'])[1]", "class": "", "type": "" },
+        "ContinueShoppingButton": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "button", "roleOptions": { "name": "Continue Shopping" } },
+        "ViewCartButtonInModal": { "id": "", "name": "", "xpath": "//div[@class='modal-body']//a[@href='/view_cart']", "class": "", "type": "" },
+        "ProductImageWrapper": { "id": "", "name": "", "xpath": "", "class": ".product-image-wrapper", "type": "" },
+        "ProductInfoParagraphs": { "id": "", "name": "", "xpath": "", "class": ".productinfo p", "type": "" },
+        "ModalDialog": { "id": "", "name": "", "xpath": "", "class": ".modal-dialog", "type": "" }
+      }
+    },
+    "ProductDetail": {
+      "relative_path": "/product_details/*",
+      "elements": {
+        "ProductName": { "id": "", "name": "", "xpath": "", "class": ".product-information h2", "type": "" },
+        "ProductCategory": { "id": "", "name": "", "xpath": "//div[@class='product-information']/p[contains(text(),'Category')]", "class": "", "type": "" },
+        "ProductPrice": { "id": "", "name": "", "xpath": "", "class": ".product-information span span", "type": "" },
+        "ProductAvailability": { "id": "", "name": "", "xpath": "", "class": ".product-information p:nth-child(6)", "type": "" },
+        "ProductCondition": { "id": "", "name": "", "xpath": "", "class": ".product-information p:nth-child(7)", "type": "" },
+        "ProductBrand": { "id": "", "name": "", "xpath": "", "class": ".product-information p:nth-child(8)", "type": "" },
+        "ProductQuantityInput": { "id": "", "name": "", "xpath": "", "class": ".product-information input[type='number']", "type": "" },
+        "AddToCartButton": { "id": "", "name": "", "xpath": "", "class": ".product-information button.cart", "type": "" }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "Login": {
+    "InvalidCredentials": "Your email or password is incorrect!",
+    "EmailRequired": "Email Address is required",
+    "PasswordRequired": "Password is required"
+  },
+  "Signup": {
+    "EmailAlreadyExists": "Email Address already exist!",
+    "NameRequired": "Name is required",
+    "EmailRequired": "Email is required"
+  }
+}

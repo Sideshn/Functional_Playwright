@@ -1,0 +1,38 @@
+{
+  "AccountCreation": {
+    "SuccessTitle": "Account Created!",
+    "SuccessMessage1": "Congratulations! Your new account has been successfully created!",
+    "SuccessMessage2": "You can now take advantage of member privileges to enhance your online shopping experience with us."
+  },
+  "AccountDeletion": {
+    "SuccessTitle": "Account Deleted!",
+    "SuccessMessage1": "Your account has been permanently deleted!",
+    "SuccessMessage2": "You can create new account to take advantage of member privileges to enhance your online shopping experience with us."
+  },
+  "ContactUs": {
+    "GetInTouchHeading": "Get In Touch",
+    "SuccessMessage": "Success! Your details have been submitted successfully."
+  },
+  "TestCases": {
+    "PageHeading": "Test Cases"
+  },
+  "Products": {
+    "AllProductsHeading": "All Products",
+    "SearchedProductsHeading": "Searched Products",
+    "Category": "Category",
+    "PriceCurrency": "Rs.",
+    "Availability": "In Stock",
+    "Condition": "New",
+    "Brand": "Brand"
+  },
+  "Subscription": {
+    "Heading": "Subscription",
+    "SuccessMessage": "You have been successfully subscribed!"
+  },
+  "HomeScreen": {
+    "Title": "Automation Exercise"
+  },
+  "Cart": {
+    "OrderSuccessMessage": "Congratulations! Your order has been confirmed!"
+  }
+}

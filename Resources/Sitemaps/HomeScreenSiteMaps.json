@@ -1,0 +1,22 @@
+{
+  "pages": {
+    "HomeScreen": {
+      "relative_path": "",
+      "elements": {
+        "logoImage": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "img", "roleOptions": { "name": "Website for automation practice" } },
+        "SignupOrLoginLinkOption": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Signup / Login" } },
+        "LoggedInAsLinkOption": { "id": "", "name": "", "xpath": "//a[contains(text(),'Logged in as')]", "class": "", "type": "" },
+        "LogoutButtonLinkOption": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Logout" } },
+        "DeleteAccountLinkOption": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Delete Account" } },
+        "ContactUSLinkOption": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Contact Us" } },
+        "TestCasesLinkOption": { "id": "", "name": "", "xpath": "//li/a[@href='/test_cases' and contains(text(), 'Test Cases')]", "class": "", "type": "" },
+        "ProductsLinkOption": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "link", "roleOptions": { "name": "Products" } },
+        "CartLinkOption": { "id": "", "name": "", "xpath": "//a[@href='/view_cart' and contains(text(), 'Cart')]", "class": "", "type": "" },
+        "SubscriptionHeading": { "id": "", "name": "", "xpath": "", "class": "", "type": "role", "role": "heading", "roleOptions": { "name": "Subscription" } },
+        "SubscriptionEmailInput": { "id": "#susbscribe_email", "name": "", "xpath": "", "class": "", "type": "" },
+        "SubscribeButton": { "id": "#subscribe", "name": "", "xpath": "", "class": "", "type": "" },
+        "SubscriptionSuccessMessage": { "id": "", "name": "", "xpath": "", "class": ".alert-success.alert", "type": "" }
+      }
+    }
+  }
+}

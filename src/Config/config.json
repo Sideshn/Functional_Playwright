@@ -1,0 +1,57 @@
+{
+  "app": {
+    "baseUrl": "https://automationexercise.com/",
+    "timeout": 60000,
+    "waitUntil": "networkidle"
+  },
+  "browser": {
+  "name": "chrome"
+  },
+  "users": {
+    "administrator": {
+      "title": "Mr",
+      "username": "Leo Das",
+      "password": "Test@123456",
+      "emailAddress": "leodas@automation.com",
+      "dateOfBirth": {
+        "day": "15",
+        "month": "6",
+        "year": "1990"
+      },
+      "address": {
+        "firstName": "Leo",
+        "lastName": "Das",
+        "company": "Test Automation Company",
+        "address1": "123 Main Street",
+        "address2": "Building A, Floor 2",
+        "country": "India",
+        "state": "Karnataka",
+        "city": "Bangalore",
+        "zipcode": "560001",
+        "mobile": "9876543210"
+      },
+      "subscriptions": {
+        "newsletter": true,
+        "offers": true
+      }
+    }
+  },
+  "contactUs": {
+    "testUser": {
+      "name": "Test User",
+      "email": "testuser@automationexercise.com",
+      "subject": "Test Automation Query",
+      "message": "This is a test message submitted through automation testing. Please ignore this message as it is for testing purposes only."
+    }
+  },
+  "products": {
+    "searchKeyword": "Blue Top"
+  },
+  "subscription": {
+    "email": "testuser@automationexercise.com"
+  },
+  "environment": {
+    "name": "local",
+    "ignoreHTTPSErrors": true
+  }
+}
