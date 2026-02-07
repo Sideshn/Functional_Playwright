@@ -3,7 +3,7 @@ const { logger } = require('../Utils/logger');
 const fs = require('fs');
 const path = require('path');
 
-const csvParse = require('csv-parse/sync');
+// const csvParse = require('csv-parse/sync');
 const xml2js = require('xml2js');
 const { PDFParse } = require('pdf-parse');
 

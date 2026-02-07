@@ -83,16 +83,9 @@ pipeline {
                 script {
                     echo "🌐 Installing Playwright browser: ${params.BROWSER}..."
                     nodejs(nodeJSInstallationName: "NodeJS ${NODE_VERSION}") {
-                        // Only install the selected browser to save time
-                        // Check if already installed first
-                        def browserCheck = bat(script: "npx playwright install --dry-run ${params.BROWSER}", returnStatus: true)
-                        
-                        if (browserCheck != 0) {
-                            echo "Installing ${params.BROWSER}..."
-                            bat "npx playwright install --with-deps ${params.BROWSER}"
-                        } else {
-                            echo "✓ ${params.BROWSER} already installed, skipping download"
-                        }
+                        // Install only the selected browser to save time
+                        echo "Installing ${params.BROWSER}..."
+                        bat "npx playwright install --with-deps ${params.BROWSER}"
                     }
                 }
             }
@@ -104,12 +97,7 @@ pipeline {
                     echo "🧪 Running Playwright UI tests..."
                     
                     def testCommand = 'npx playwright test'
-                    
-                    // Add test suite selection
-                    if (params.TEST_SUITE != 'all') {
-                        def testPath = "tests/${params.TEST_SUITE.capitalize()}"
-                        // Map common suite names
-                        if (params.TEST_SUITE == 'smoke') {
+
                             testPath = 'tests/Smoke'
                         } else if (params.TEST_SUITE == 'cart') {
                             testPath = 'tests/Cart'
@@ -138,8 +126,11 @@ pipeline {
                     // Add workers configuration
                     testCommand += " --workers=${params.WORKERS}"
                     
-                    // Add reporters: HTML, list, and Allure
+                    // Add reporters: HTML, list, and Allure  
                     testCommand += ' --reporter=html,list,allure-playwright'
+                    
+                    // Add debug output to see actual errors
+                    testCommand += ' --reporter=line'
                     
                     echo "Executing: ${testCommand}"
                     
