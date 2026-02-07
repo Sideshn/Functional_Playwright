@@ -97,9 +97,12 @@ pipeline {
                     echo "🧪 Running Playwright UI tests..."
                     
                     def testCommand = 'npx playwright test'
-
-                            testPath = 'tests/Smoke'
-                        } else if (params.TEST_SUITE == 'cart') {
+                    def testPath = ''
+                    
+                    // Select test path based on TEST_SUITE parameter
+                    if (params.TEST_SUITE == 'all') {
+                        testPath = 'tests'
+                    } else if (params.TEST_SUITE == 'cart') {
                             testPath = 'tests/Cart'
                         } else if (params.TEST_SUITE == 'products') {
                             testPath = 'tests/Product'
@@ -112,8 +115,11 @@ pipeline {
                         } else if (params.TEST_SUITE == 'navigation') {
                             testPath = 'tests/Navigation'
                         } else if (params.TEST_SUITE == 'testcases') {
-                            testPath = 'tests/TestCases'
-                        }
+                        testPath = 'tests/TestCases'
+                    }
+                    
+                    // Add test path to command if specified
+                    if (testPath != '') {
                         testCommand += " ${testPath}"
                     }
                     
