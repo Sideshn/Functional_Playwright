@@ -47,8 +47,9 @@ pipeline {
         stage('Clean Workspace') {
             steps {
                 script {
-                    echo "🧹 Cleaning workspace before checkout..."
-                    cleanWs()
+                    echo "🧹 Cleaning workspace COMPLETELY before checkout..."
+                    // Delete everything in workspace including hidden files
+                    deleteDir()
                 }
             }
         }
@@ -56,8 +57,21 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    echo "🔍 Checking out code..."
-                    checkout scm
+                    echo "🔍 Checking out FRESH code from repository..."
+                    // Use checkout with clean option to ensure deleted files are removed
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: scm.branches,
+                        extensions: [
+                            [$class: 'CleanBeforeCheckout'],
+                            [$class: 'CleanCheckout']
+                        ],
+                        userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                    
+                    // List test files to verify what's actually checked out
+                    echo "📂 Listing test spec files in workspace:"
+                    bat 'dir /s /b tests\\*.spec.js 2>nul || echo No spec files found'
                 }
             }
         }
