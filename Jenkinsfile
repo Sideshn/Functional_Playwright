@@ -44,6 +44,15 @@ pipeline {
     }
     
     stages {
+        stage('Clean Workspace') {
+            steps {
+                script {
+                    echo "🧹 Cleaning workspace before checkout..."
+                    cleanWs()
+                }
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 script {
