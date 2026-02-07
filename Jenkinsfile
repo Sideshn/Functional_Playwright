@@ -22,7 +22,7 @@ pipeline {
         )
         string(
             name: 'WORKERS', 
-            defaultValue: '3', 
+            defaultValue: '1', 
             description: 'Number of parallel workers'
         )
         booleanParam(
