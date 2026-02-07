@@ -11,7 +11,7 @@ pipeline {
     parameters {
         choice(
             name: 'TEST_SUITE', 
-            choices: ['all', 'smoke', 'cart', 'products', 'signup', 'contact', 'homepage', 'navigation', 'testcases'], 
+            choices: ['all', 'cart', 'products', 'signup', 'contact', 'homepage', 'navigation', 'testcases'], 
             description: 'Select test suite to run'
         )
         choice(
@@ -21,7 +21,7 @@ pipeline {
         )
         string(
             name: 'WORKERS', 
-            defaultValue: '1', 
+            defaultValue: '3', 
             description: 'Number of parallel workers'
         )
         booleanParam(
@@ -34,8 +34,8 @@ pipeline {
     options {
         // Keep only last 10 builds
         buildDiscarder(logRotator(numToKeepStr: '10'))
-        // Timeout after 1 hour
-        timeout(time: 60, unit: 'MINUTES')
+        // Timeout after 2 hours
+        timeout(time: 120, unit: 'MINUTES')
         // Add timestamps to console output
         timestamps()
         // Disable concurrent builds
@@ -123,8 +123,8 @@ pipeline {
                     // Add browser selection
                     testCommand += " --project=${params.BROWSER}"
                     
-                    // Always run in headed mode
-                    testCommand += ' --headed'
+                    // Run in headless mode for CI (faster execution)
+                    // testCommand += ' --headed'  // Uncomment for local debugging only
                     
                     // Add workers configuration
                     testCommand += " --workers=${params.WORKERS}"
