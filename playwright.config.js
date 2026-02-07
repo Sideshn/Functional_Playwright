@@ -22,6 +22,7 @@ const config = defineConfig({
   reporter: [
     ['list'],
     ['html', { open: 'never' }],
+    ['allure-playwright'],
   ],
   use: {
     headless: false,

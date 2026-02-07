@@ -878,23 +878,41 @@ class CoreKeywords {
       
       return await new Promise((resolve, reject) => {
         let dialogMessage = '';
+        let dialogHandled = false;
         
         // Setup one-time dialog listener
         this._page.once('dialog', async dialog => {
           try {
+            if (dialogHandled) {
+              logger.info(`⚠️ Dialog already handled by persistent handler`);
+              return;
+            }
+            dialogHandled = true;
             dialogMessage = dialog.message();
             logger.info(`📢 Dialog appeared with message: "${dialogMessage}"`);
             await dialog.accept();
             logger.success(`✅ Dialog ACCEPTED`);
             resolve(dialogMessage);
           } catch (error) {
-            logger.error(`❌ Failed to accept dialog: ${error.message}`);
-            reject(error);
+            if (error.message.includes('already handled')) {
+              logger.info(`⚠️ Dialog was already handled by persistent handler`);
+              resolve(dialogMessage || 'Dialog handled by persistent handler');
+            } else {
+              logger.error(`❌ Failed to accept dialog: ${error.message}`);
+              reject(error);
+            }
           }
         });
         
         // Execute the action that triggers the dialog
         action().catch(reject);
+        
+        // Timeout fallback in case dialog was handled by persistent handler
+        setTimeout(() => {
+          if (!dialogHandled && dialogMessage) {
+            resolve(dialogMessage);
+          }
+        }, 1000);
       });
     } catch (error) {
       logger.error(`❌ Dialog handling failed: ${error.message}`);
@@ -1058,21 +1076,29 @@ class CoreKeywords {
   setupPromptHandler(promptText = '') {
     logger.info(`🔔 Setting up persistent prompt handler with default input: "${promptText}"`);
     
+    // Remove any existing dialog listeners first
+    this._page.removeAllListeners('dialog');
+    
     this._page.on('dialog', async dialog => {
-      const type = dialog.type();
-      const message = dialog.message();
-      logger.info(`📢 ${type.toUpperCase()} dialog appeared with message: "${message}"`);
-      
-      if (type === 'prompt') {
-        const defaultValue = dialog.defaultValue();
-        if (defaultValue) {
-          logger.info(`   Default value: "${defaultValue}"`);
+      try {
+        const type = dialog.type();
+        const message = dialog.message();
+        logger.info(`📢 Dialog appeared with message: "${message}"`);
+        logger.info(`📢 ${type.toUpperCase()} dialog appeared with message: "${message}"`);
+        
+        if (type === 'prompt') {
+          const defaultValue = dialog.defaultValue();
+          if (defaultValue) {
+            logger.info(`   Default value: "${defaultValue}"`);
+          }
+          await dialog.accept(promptText);
+          logger.success(`✅ Prompt ACCEPTED with input: "${promptText}"`);
+        } else {
+          await dialog.accept();
+          logger.success(`✅ Dialog ACCEPTED: "${message}"`);
         }
-        await dialog.accept(promptText);
-        logger.success(`✅ Prompt ACCEPTED with input: "${promptText}"`);
-      } else {
-        await dialog.accept();
-        logger.success(`✅ Dialog ACCEPTED`);
+      } catch (error) {
+        logger.error(`❌ Dialog handling failed: ${error.message}`);
       }
     });
   }
