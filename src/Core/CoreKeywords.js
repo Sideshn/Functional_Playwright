@@ -964,16 +964,27 @@ class CoreKeywords {
   setupDialogHandler(actionType = 'accept') {
     logger.info(`🔔 Setting up persistent dialog handler: ${actionType.toUpperCase()}`);
     
+    // Remove any existing dialog listeners first to prevent conflicts
+    this._page.removeAllListeners('dialog');
+    
     this._page.on('dialog', async dialog => {
-      const message = dialog.message();
-      logger.info(`📢 Dialog appeared with message: "${message}"`);
-      
-      if (actionType === 'accept') {
-        await dialog.accept();
-        logger.success(`✅ Dialog ACCEPTED: "${message}"`);
-      } else {
-        await dialog.dismiss();
-        logger.success(`✅ Dialog DISMISSED: "${message}"`);
+      try {
+        const message = dialog.message();
+        logger.info(`📢 Dialog appeared with message: "${message}"`);
+        
+        if (actionType === 'accept') {
+          await dialog.accept();
+          logger.success(`✅ Dialog ACCEPTED: "${message}"`);
+        } else {
+          await dialog.dismiss();
+          logger.success(`✅ Dialog DISMISSED: "${message}"`);
+        }
+      } catch (error) {
+        if (error.message.includes('already handled')) {
+          logger.info(`⚠️ Dialog was already handled`);
+        } else {
+          logger.error(`❌ Dialog handling error: ${error.message}`);
+        }
       }
     });
   }

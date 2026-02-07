@@ -22,7 +22,11 @@ const config = defineConfig({
   reporter: [
     ['list'],
     ['html', { open: 'never' }],
-    ['allure-playwright'],
+    ['allure-playwright', {
+      outputFolder: 'allure-results',
+      detail: true,
+      suiteTitle: true,
+    }],
   ],
   use: {
     headless: false,
