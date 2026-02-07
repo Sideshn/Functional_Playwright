@@ -4,7 +4,8 @@ pipeline {
     // Environment variables
     environment {
         NODE_VERSION = '18'  // Node.js version required
-        PLAYWRIGHT_BROWSERS_PATH = "${WORKSPACE}/.playwright"
+        // Cache browsers in a persistent location outside workspace
+        PLAYWRIGHT_BROWSERS_PATH = 'C:\\ProgramData\\Jenkins\\.playwright-browsers'
     }
     
     // Build parameters for flexibility
@@ -80,10 +81,18 @@ pipeline {
         stage('Install Playwright Browsers') {
             steps {
                 script {
-                    echo "🌐 Installing Playwright browsers..."
+                    echo "🌐 Installing Playwright browser: ${params.BROWSER}..."
                     nodejs(nodeJSInstallationName: "NodeJS ${NODE_VERSION}") {
-                        // Install browsers with system dependencies
-                        bat 'npx playwright install --with-deps'
+                        // Only install the selected browser to save time
+                        // Check if already installed first
+                        def browserCheck = bat(script: "npx playwright install --dry-run ${params.BROWSER}", returnStatus: true)
+                        
+                        if (browserCheck != 0) {
+                            echo "Installing ${params.BROWSER}..."
+                            bat "npx playwright install --with-deps ${params.BROWSER}"
+                        } else {
+                            echo "✓ ${params.BROWSER} already installed, skipping download"
+                        }
                     }
                 }
             }
