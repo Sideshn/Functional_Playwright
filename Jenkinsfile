@@ -149,17 +149,14 @@ pipeline {
                     // Add browser selection
                     testCommand += " --project=${params.BROWSER}"
                     
-                    // Run in headless mode for CI (faster execution)
-                    // testCommand += ' --headed'  // Uncomment for local debugging only
+                    // Add reporters
+                    testCommand += " --reporter=line,html,allure-playwright"
                     
-                    // Add workers configuration
+                    // Add workers
                     testCommand += " --workers=${params.WORKERS}"
                     
-                    // Add reporters: HTML, list, and Allure  
-                    testCommand += ' --reporter=html,list,allure-playwright'
-                    
-                    // Add debug output to see actual errors
-                    testCommand += ' --reporter=line'
+                    // Run in headless mode for CI (faster execution)
+                    // testCommand += ' --headed'  // Uncomment for local debugging only
                     
                     echo "Executing: ${testCommand}"
                     
